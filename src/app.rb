@@ -8,9 +8,9 @@ class App
     end
 
     def start
-        view = View::Ruby2dView.new
-        Thread.new{ init_timer(view) }
-        view.start(@initial_state)
+        @view = View::Ruby2dView.new(self)
+        Thread.new{ init_timer(@view) }
+        @view.start(@initial_state)
     end
     def init_timer(view)
         loop do
@@ -19,6 +19,15 @@ class App
             sleep 0.5
         end
     end
+
+    def send_action(action, params)
+        new_state = Actions.send( action, @initial_state, params )
+        if new_state.hash != @initial_state
+            @initial_state = new_state
+            @view.render_game(@initial_state)
+        end
+    end
+    
 end
 
 app = App.new
