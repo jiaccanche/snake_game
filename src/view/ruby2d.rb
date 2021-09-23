@@ -19,7 +19,18 @@ module View
             show
         end
 
+        def end_game(flag)
+            extend Ruby2D::DSL
+
+            if flag
+              close
+              puts "end game"
+            end
+        end
+
         def render_game(state)
+            extend Ruby2D::DSL
+
             render_food(state)
             render_snake(state)
         end

@@ -2,13 +2,15 @@ require_relative "../model/state"
 
 module Actions
     def self.move_snake(state)
-        next_direction = state.current_direction
         next_position = calc_next_position(state)
 
-        if next_position_is_valid?(state, next_position)
-            move_snake_to( state, next_position )
+        if next_position_is_food?(state, next_position)
+          state = grow_snake_to(state, next_position)
+          generate_food(state)
+        elsif next_position_is_valid?(state, next_position)
+          move_snake_to(state, next_position)
         else
-            end_game(state)
+          end_game(state)
         end
     end
     def self.change_direction(state, direction)
@@ -19,11 +21,6 @@ module Actions
       end
       state
     end
-
-    def send(action, state, params)
-      
-    end
-    
         
     private
 
@@ -85,9 +82,26 @@ module Actions
       end
 
     end
+
+    def self.next_position_is_food?(state, next_position)
+      ( state.food.row == next_position.row ) && ( state.food.col == next_position.col )
+    end
+
+    def self.grow_snake_to(state, next_position)
+      new_snake_positions = [next_position] + state.snake.positions
+      state.snake.positions = new_snake_positions
+      state
+    end
+
+    def self.generate_food(state)
+      new_food = Model::Food.new(rand(state.grid.rows),rand( state.grid.cols ))
+      state.food = new_food
+      state
+    end
     
     def self.end_game(state)
-            state.game = true
-            state
+      puts "end_game"
+      state.game_finished = true
+      state
     end
 end

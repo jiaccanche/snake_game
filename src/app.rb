@@ -9,13 +9,19 @@ class App
 
     def start
         @view = View::Ruby2dView.new(self)
-        Thread.new{ init_timer(@view) }
+        timer_thread = Thread.new{init_timer}
         @view.start(@initial_state)
+        #timer_thread.join
     end
-    def init_timer(view)
+    def init_timer
         loop do
-            @initial_state = Actions::move_snake(@initial_state)
-            view.render_game(@initial_state)
+            if @initial_state.game_finished
+                puts "Juego finalizado"
+                puts "Puntaje: #{ @initial_state.snake.positions.length }"
+                @view.end_game(true)
+            end 
+            @initial_state = Actions.move_snake(@initial_state)
+            @view.render_game(@initial_state)
             sleep 0.5
         end
     end
