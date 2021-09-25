@@ -27,4 +27,8 @@ _Dí cómo será ese paso_
 Da un ejemplo
 ```
 
-[![Watch the video](https://i.imgur.com/vKb2F1B.png)](https://github.com/jiaccanche/snake_game/blob/master/gameplay.mp4)
+
+https://user-images.githubusercontent.com/42982450/134779512-32d4544a-0c4c-4dbf-8a00-8f515bd3ebc1.mp4
+
+
+
