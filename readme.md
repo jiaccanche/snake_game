@@ -27,4 +27,4 @@ _Dí cómo será ese paso_
 Da un ejemplo
 ```
 
-<a href="https://github.com/jiaccanche">![Jorge](https://github.com/jiaccanche/snake_game/blob/master/gameplay.mp4)</a>
+[![Watch the video](https://i.imgur.com/vKb2F1B.png)](https://github.com/jiaccanche/snake_game/blob/master/gameplay.mp4)
